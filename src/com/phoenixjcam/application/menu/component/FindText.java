@@ -18,10 +18,10 @@ import com.phoenixjcam.application.Notepad;
 /**
  * 
  * @author Bart Bien <br>
- *         source available at my web site <a href="http://phoenixjcam.com">phoenixjcam.com</a>
+ *         source available at my web site <a
+ *         href="http://phoenixjcam.com">phoenixjcam.com</a>
  */
-public class FindText extends JDialog implements ActionListener
-{
+public class FindText extends JDialog implements ActionListener {
 	private static final long serialVersionUID = 1L;
 
 	private Notepad notepad;
@@ -39,8 +39,7 @@ public class FindText extends JDialog implements ActionListener
 
 	private int startIndex = 0;
 
-	public FindText(Notepad nt)
-	{
+	public FindText(Notepad nt) {
 		setTitle("Finder");
 		notepad = nt;
 		init();
@@ -56,8 +55,7 @@ public class FindText extends JDialog implements ActionListener
 		add(btnCancel());
 	}
 
-	public void init()
-	{
+	public void init() {
 		setLayout(null);
 
 		int width = 400;
@@ -65,74 +63,67 @@ public class FindText extends JDialog implements ActionListener
 		setSize(width, height);
 		setResizable(false);
 
-		Point centerPoint = GraphicsEnvironment.getLocalGraphicsEnvironment().getCenterPoint();
-		setLocation((centerPoint.x) - (width / 2), (centerPoint.y) - (height / 2));
+		Point centerPoint = GraphicsEnvironment.getLocalGraphicsEnvironment()
+				.getCenterPoint();
+		setLocation((centerPoint.x) - (width / 2), (centerPoint.y)
+				- (height / 2));
 	}
 
-	public JLabel lblFind()
-	{
+	public JLabel lblFind() {
 		lblFind = new JLabel("Find:");
 		lblFind.setBounds(10, 10, 120, 20);
 		lblFind.setFont(new Font("Arial", Font.PLAIN, 16));
 		return lblFind;
 	}
 
-	public JLabel lblReplace()
-	{
+	public JLabel lblReplace() {
 		lblReplace = new JLabel("	Replace:");
 		lblReplace.setBounds(10, 50, 120, 20);
 		lblReplace.setFont(new Font("Arial", Font.PLAIN, 16));
 		return lblReplace;
 	}
 
-	public JTextField txtfFind()
-	{
+	public JTextField txtfFind() {
 		txtfFind = new JTextField(30);
 		txtfFind.setBounds(80, 10, 120, 20);
 		return txtfFind;
 	}
 
-	public JTextField txtfReplace()
-	{
+	public JTextField txtfReplace() {
 		txtfReplace = new JTextField(30);
 		txtfReplace.setBounds(80, 50, 120, 20);
 		return txtfReplace;
 	}
 
-	public JButton btnFind()
-	{
+	public JButton btnFind() {
 		btnFind = new JButton("Find");
 		btnFind.setBounds(240, 10, 120, 25);
 		btnFind.addActionListener(this);
 		return btnFind;
 	}
 
-	public JButton btnFindNext()
-	{
+	public JButton btnFindNext() {
 		btnFindNext = new JButton("Find Next");
 		btnFindNext.setBounds(240, 45, 120, 25);
 		btnFindNext.addActionListener(this);
 		return btnFindNext;
 	}
 
-	public JButton btnReplace()
-	{
+	public JButton btnReplace() {
 		btnReplace = new JButton("Replace");
 		btnReplace.setBounds(240, 80, 120, 25);
 		btnReplace.addActionListener(this);
 		return btnReplace;
 	}
 
-	public JButton btnReplaceAll()
-	{
+	public JButton btnReplaceAll() {
 		btnReplaceAll = new JButton("Replace All");
 		btnReplaceAll.setBounds(240, 115, 120, 25);
 		btnReplaceAll.addActionListener(this);
 		return btnReplaceAll;
 	}
 
-	public JButton btnCancel()
-	{
+	public JButton btnCancel() {
 		btnCancel = new JButton("Cancel");
 		btnCancel.setBounds(240, 150, 120, 25);
 		btnCancel.addActionListener(this);
@@ -140,46 +131,34 @@ public class FindText extends JDialog implements ActionListener
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent e)
-	{
+	public void actionPerformed(ActionEvent e) {
 		Object event = e.getSource();
 
-		if (event == btnFind)
-		{
+		if (event == btnFind) {
 			actionFind();
-		}
-		else if (event == btnFindNext)
-		{
+		} else if (event == btnFindNext) {
 			actionFindNext();
-		}
-		else if (event == btnReplace)
-		{
+		} else if (event == btnReplace) {
 			actionReplace();
-		}
-		else if (event == btnReplaceAll)
-		{
+		} else if (event == btnReplaceAll) {
 			actionReplaceAll();
-		}
-		else if (event == btnCancel)
-		{
+		} else if (event == btnCancel) {
 			actionCancel();
 		}
 	}
 
-	public void actionFind()
-	{
+	public void actionFind() {
 		String currentTxt = notepad.getTxtArea().getText();
 
 		int start = currentTxt.indexOf(txtfFind.getText());
 
-		if (start == -1)
-		{
+		if (start == -1) {
 			startIndex = 0;
-			JOptionPane.showMessageDialog(null, "Could not find " + txtfFind.getText() + "!");
+			JOptionPane.showMessageDialog(null,
+					"Could not find " + txtfFind.getText() + "!");
 			return;
 		}
-		if (start == currentTxt.lastIndexOf(txtfFind.getText()))
-		{
+		if (start == currentTxt.lastIndexOf(txtfFind.getText())) {
 			startIndex = 0;
 		}
 
@@ -187,29 +166,21 @@ public class FindText extends JDialog implements ActionListener
 		notepad.getTxtArea().select(start, end);
 	}
 
-	public void actionFindNext()
-	{
+	public void actionFindNext() {
 		String selectedTxt = notepad.getTxtArea().getSelectedText();
 
-		try
-		{
+		try {
 			selectedTxt.equals("");
-		}
-		catch (NullPointerException e)
-		{
+		} catch (NullPointerException e) {
 			selectedTxt = txtfFind.getText();
-			try
-			{
+			try {
 				selectedTxt.equals("");
-			}
-			catch (NullPointerException e2)
-			{
+			} catch (NullPointerException e2) {
 				selectedTxt = JOptionPane.showInputDialog("Find:");
 				txtfFind.setText(selectedTxt);
 			}
 		}
-		try
-		{
+		try {
 			String currentTxt = notepad.getTxtArea().getText();
 			int start = currentTxt.indexOf(selectedTxt, startIndex);
 
@@ -217,31 +188,23 @@ public class FindText extends JDialog implements ActionListener
 			notepad.getTxtArea().select(start, end);
 			startIndex = end + 1;
 
-			if (start == currentTxt.lastIndexOf(selectedTxt))
-			{
+			if (start == currentTxt.lastIndexOf(selectedTxt)) {
 				startIndex = 0;
 			}
-		}
-		catch (NullPointerException e)
-		{
+		} catch (NullPointerException e) {
 		}
 	}
 
-	public void actionReplace()
-	{
-		try
-		{
+	public void actionReplace() {
+		try {
 			actionFind();
 			notepad.getTxtArea().replaceSelection(txtfReplace.getText());
-		}
-		catch (NullPointerException e)
-		{
+		} catch (NullPointerException e) {
 			System.out.print("Null Pointer Exception: " + e);
 		}
 	}
 
-	public void actionReplaceAll()
-	{
+	public void actionReplaceAll() {
 		JTextArea txtArea = notepad.getTxtArea();
 		String currentTxt = notepad.getTxtArea().getText();
 
@@ -251,8 +214,7 @@ public class FindText extends JDialog implements ActionListener
 		txtArea.setText(currentTxt.replaceAll(regex, replacement));
 	}
 
-	public void actionCancel()
-	{
+	public void actionCancel() {
 		this.setVisible(false);
 	}
 }

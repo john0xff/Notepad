@@ -13,38 +13,34 @@ import com.phoenixjcam.application.Notepad;
 /**
  * 
  * @author Bart Bien <br>
- *         source available at my web site <a href="http://phoenixjcam.com">phoenixjcam.com</a>
+ *         source available at my web site <a
+ *         href="http://phoenixjcam.com">phoenixjcam.com</a>
  */
-public class HelpMenu implements ActionListener
-{
+public class HelpMenu implements ActionListener {
 	private Notepad notepad;
 	private JMenu mnHelp;
 	private JMenuItem showHelp;
 	private JMenuItem about;
 
-	public HelpMenu(Notepad nt)
-	{
+	public HelpMenu(Notepad nt) {
 		notepad = nt;
 	}
 
-	public JMenu helpItems()
-	{
+	public JMenu helpItems() {
 		mnHelp = new JMenu("Help");
 		mnHelp.add(helper());
 		mnHelp.add(notepadInfo());
 		return mnHelp;
 	}
 
-	public JMenuItem helper()
-	{
+	public JMenuItem helper() {
 		showHelp = new JMenuItem("Show Help");
 		showHelp.setAccelerator(KeyStroke.getKeyStroke("shift F1"));
 		showHelp.addActionListener(this);
 		return showHelp;
 	}
 
-	public JMenuItem notepadInfo()
-	{
+	public JMenuItem notepadInfo() {
 		about = new JMenuItem("Notepad - Info");
 		about.setAccelerator(KeyStroke.getKeyStroke("F1"));
 		about.addActionListener(this);
@@ -52,28 +48,23 @@ public class HelpMenu implements ActionListener
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent e)
-	{
+	public void actionPerformed(ActionEvent e) {
 		Object event = e.getSource();
 
-		if (event == showHelp)
-		{
+		if (event == showHelp) {
 			actionHelp();
-		}
-		else if (event == about)
-		{
+		} else if (event == about) {
 			actionNotepadInfo();
 		}
 	}
 
-	public void actionHelp()
-	{
-		
+	public void actionHelp() {
+
 		JOptionPane.showMessageDialog(notepad, "phoenixjcam.com");
 	}
 
-	public void actionNotepadInfo()
-	{
-		JOptionPane.showMessageDialog(notepad, "author Bart Bien \nphoenixjcam.com");
+	public void actionNotepadInfo() {
+		JOptionPane.showMessageDialog(notepad,
+				"author Bart Bien \nphoenixjcam.com");
 	}
 }

@@ -15,10 +15,10 @@ import com.phoenixjcam.application.Notepad;
 /**
  * 
  * @author Bart Bien <br>
- *         source available at my web site <a href="http://phoenixjcam.com">phoenixjcam.com</a>
+ *         source available at my web site <a
+ *         href="http://phoenixjcam.com">phoenixjcam.com</a>
  */
-public class StyleMenu implements ActionListener
-{
+public class StyleMenu implements ActionListener {
 	private Notepad notepad;
 	private JMenu mnStyleUI;
 	private ButtonGroup btngStyle;
@@ -26,15 +26,13 @@ public class StyleMenu implements ActionListener
 	private JCheckBoxMenuItem metalStyle;
 	private JCheckBoxMenuItem nimbusStyle;
 
-	public StyleMenu(Notepad nt)
-	{
+	public StyleMenu(Notepad nt) {
 		notepad = nt;
 		btngStyle = new ButtonGroup();
 		actionWindowsOption();
 	}
 
-	public JMenu styleItems()
-	{
+	public JMenu styleItems() {
 		mnStyleUI = new JMenu("Style");
 		mnStyleUI.add(windowsOption());
 		mnStyleUI.add(metalOption());
@@ -43,8 +41,7 @@ public class StyleMenu implements ActionListener
 		return mnStyleUI;
 	}
 
-	public JCheckBoxMenuItem windowsOption()
-	{
+	public JCheckBoxMenuItem windowsOption() {
 		winStyle = new JCheckBoxMenuItem("Windows Look");
 		winStyle.addActionListener(this);
 		btngStyle.add(winStyle);
@@ -52,16 +49,14 @@ public class StyleMenu implements ActionListener
 		return winStyle;
 	}
 
-	public JCheckBoxMenuItem metalOption()
-	{
+	public JCheckBoxMenuItem metalOption() {
 		metalStyle = new JCheckBoxMenuItem("Metal Look");
 		metalStyle.addActionListener(this);
 		btngStyle.add(metalStyle);
 		return metalStyle;
 	}
 
-	public JCheckBoxMenuItem nimbusOption()
-	{
+	public JCheckBoxMenuItem nimbusOption() {
 		nimbusStyle = new JCheckBoxMenuItem("Nimbus Look");
 		nimbusStyle.addActionListener(this);
 		btngStyle.add(nimbusStyle);
@@ -69,60 +64,47 @@ public class StyleMenu implements ActionListener
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent e)
-	{
+	public void actionPerformed(ActionEvent e) {
 		Object event = e.getSource();
 
-		if (event == winStyle)
-		{
+		if (event == winStyle) {
 			actionWindowsOption();
-		}
-		else if (event == metalStyle)
-		{
+		} else if (event == metalStyle) {
 			actionMetalOption();
-		}
-		else if (event == nimbusStyle)
-		{
+		} else if (event == nimbusStyle) {
 			actionNimbusOption();
 		}
 	}
 
-	public void actionWindowsOption()
-	{
-		try
-		{
-			UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
-		}
-		catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e)
-		{
+	public void actionWindowsOption() {
+		try {
+			UIManager
+					.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+		} catch (ClassNotFoundException | InstantiationException
+				| IllegalAccessException | UnsupportedLookAndFeelException e) {
 			e.printStackTrace();
 		}
 
 		SwingUtilities.updateComponentTreeUI(notepad);
 	}
 
-	public void actionMetalOption()
-	{
-		try
-		{
+	public void actionMetalOption() {
+		try {
 			UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
-		}
-		catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e)
-		{
+		} catch (ClassNotFoundException | InstantiationException
+				| IllegalAccessException | UnsupportedLookAndFeelException e) {
 			e.printStackTrace();
 		}
 
 		SwingUtilities.updateComponentTreeUI(notepad);
 	}
 
-	public void actionNimbusOption()
-	{
-		try
-		{
-			UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
-		}
-		catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e)
-		{
+	public void actionNimbusOption() {
+		try {
+			UIManager
+					.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+		} catch (ClassNotFoundException | InstantiationException
+				| IllegalAccessException | UnsupportedLookAndFeelException e) {
 			e.printStackTrace();
 		}
 

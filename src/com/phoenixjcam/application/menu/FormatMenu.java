@@ -16,10 +16,10 @@ import com.phoenixjcam.application.menu.component.FormatFont;
 /**
  * 
  * @author Bart Bien <br>
- *         source available at my web site <a href="http://phoenixjcam.com">phoenixjcam.com</a>
+ *         source available at my web site <a
+ *         href="http://phoenixjcam.com">phoenixjcam.com</a>
  */
-public class FormatMenu implements ActionListener
-{
+public class FormatMenu implements ActionListener {
 	private Notepad notepad;
 	private FormatFont format;
 
@@ -30,14 +30,12 @@ public class FormatMenu implements ActionListener
 	private JMenuItem mntmToUpper;
 	private JMenuItem mntnToLower;
 
-	public FormatMenu(Notepad nt)
-	{
+	public FormatMenu(Notepad nt) {
 		notepad = nt;
 		format = new FormatFont(nt);
 	}
 
-	public JMenu formatItems()
-	{
+	public JMenu formatItems() {
 		mnFormat = new JMenu("Format");
 
 		mnFormat.add(formatFont());
@@ -49,99 +47,77 @@ public class FormatMenu implements ActionListener
 		return mnFormat;
 	}
 
-	public JMenuItem formatFont()
-	{
+	public JMenuItem formatFont() {
 		mntmFont = new JMenuItem("Font Format");
 		mntmFont.addActionListener(this);
 		return mntmFont;
 	}
 
-	public JMenuItem formatColor()
-	{
+	public JMenuItem formatColor() {
 		mntmTxtColor = new JMenuItem("Choose Text Color");
 		mntmTxtColor.addActionListener(this);
 		return mntmTxtColor;
 	}
 
-	public JCheckBoxMenuItem formatWordWrap()
-	{
+	public JCheckBoxMenuItem formatWordWrap() {
 		checkbWrap = new JCheckBoxMenuItem("WordWrap");
 		checkbWrap.addActionListener(this);
 		return checkbWrap;
 	}
 
-	public JMenuItem formatConvertUpper()
-	{
+	public JMenuItem formatConvertUpper() {
 		mntmToUpper = new JMenuItem("UPPERCASE");
 		mntmToUpper.addActionListener(this);
 		return mntmToUpper;
 	}
 
-	public JMenuItem formatConvertLower()
-	{
+	public JMenuItem formatConvertLower() {
 		mntnToLower = new JMenuItem("lowercase");
 		mntnToLower.addActionListener(this);
 		return mntnToLower;
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent e)
-	{
+	public void actionPerformed(ActionEvent e) {
 		Object event = e.getSource();
 
-		if (event == mntmFont)
-		{
+		if (event == mntmFont) {
 			actionFormatFont();
-		}
-		else if (event == mntmTxtColor)
-		{
+		} else if (event == mntmTxtColor) {
 			actionFormatColorChooser();
-		}
-		else if (event == checkbWrap)
-		{
+		} else if (event == checkbWrap) {
 			actionWordWrap();
-		}
-		else if (event == mntmToUpper)
-		{
+		} else if (event == mntmToUpper) {
 			actionFormatConvertUpper();
-		}
-		else if (event == mntnToLower)
-		{
+		} else if (event == mntnToLower) {
 			actionFormatConvertLower();
 		}
 	}
 
-	public void actionFormatFont()
-	{
+	public void actionFormatFont() {
 		format.setVisible(true);
 	}
 
-	public void actionFormatColorChooser()
-	{
-		Color colorChooser = JColorChooser.showDialog(null, "Color Chooser", Color.BLACK);
+	public void actionFormatColorChooser() {
+		Color colorChooser = JColorChooser.showDialog(null, "Color Chooser",
+				Color.BLACK);
 		JTextArea txtArea = notepad.getTxtArea();
 		txtArea.setForeground(colorChooser);
 	}
 
-	public void actionWordWrap()
-	{
+	public void actionWordWrap() {
 		JTextArea txtArea = notepad.getTxtArea();
-		if (txtArea.getLineWrap() == false)
-		{
+		if (txtArea.getLineWrap() == false) {
 			txtArea.setLineWrap(true);
-		}
-		else
-		{
+		} else {
 			txtArea.setLineWrap(false);
 		}
 	}
 
-	public void actionFormatConvertUpper()
-	{
+	public void actionFormatConvertUpper() {
 		JTextArea txtArea = notepad.getTxtArea();
 		String currentTxt = txtArea.getText();
-		try
-		{
+		try {
 			int startPos = txtArea.getSelectionStart();
 			int endPos = txtArea.getSelectionEnd();
 			String startStr = currentTxt.substring(0, startPos);
@@ -149,18 +125,14 @@ public class FormatMenu implements ActionListener
 			String convert = txtArea.getSelectedText().toUpperCase();
 			txtArea.setText(startStr + convert + endStr);
 			txtArea.select(startPos, endPos);
-		}
-		catch (NullPointerException e)
-		{
+		} catch (NullPointerException e) {
 		}
 	}
 
-	public void actionFormatConvertLower()
-	{
+	public void actionFormatConvertLower() {
 		JTextArea txtArea = notepad.getTxtArea();
 		String currentTxt = txtArea.getText();
-		try
-		{
+		try {
 			int startPos = txtArea.getSelectionStart();
 			int endPos = txtArea.getSelectionEnd();
 			String startStr = currentTxt.substring(0, startPos);
@@ -168,9 +140,7 @@ public class FormatMenu implements ActionListener
 			String convert = txtArea.getSelectedText().toLowerCase();
 			txtArea.setText(startStr + convert + endStr);
 			txtArea.select(startPos, endPos);
-		}
-		catch (NullPointerException e)
-		{
+		} catch (NullPointerException e) {
 		}
 	}
 }

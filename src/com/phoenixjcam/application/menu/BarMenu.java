@@ -7,10 +7,10 @@ import com.phoenixjcam.application.Notepad;
 /**
  * 
  * @author Bart Bien <br>
- *         source available at my web site <a href="http://phoenixjcam.com">phoenixjcam.com</a>
+ *         source available at my web site <a
+ *         href="http://phoenixjcam.com">phoenixjcam.com</a>
  */
-public class BarMenu
-{
+public class BarMenu {
 	private JMenuBar mnBar;
 
 	private FileMenu mnFile;
@@ -19,8 +19,7 @@ public class BarMenu
 	private StyleMenu mnStyle;
 	private HelpMenu mnHelp;
 
-	public BarMenu(Notepad nt)
-	{
+	public BarMenu(Notepad nt) {
 		mnFile = new FileMenu(nt);
 		mnEdit = new EditMenu(nt);
 		mnFormat = new FormatMenu(nt);

@@ -8,10 +8,10 @@ import com.phoenixjcam.application.Notepad;
 /**
  * 
  * @author Bart Bien <br>
- *         source available at my web site <a href="http://phoenixjcam.com">phoenixjcam.com</a>
+ *         source available at my web site <a
+ *         href="http://phoenixjcam.com">phoenixjcam.com</a>
  */
-public class PopupMenu
-{
+public class PopupMenu {
 
 	private Notepad notepad;
 	private JPopupMenu popupMenu;
@@ -19,8 +19,7 @@ public class PopupMenu
 	private FormatMenu mnFormat;
 	private JSeparator sep;
 
-	public PopupMenu(Notepad nt)
-	{
+	public PopupMenu(Notepad nt) {
 		notepad = nt;
 		popupMenu = new JPopupMenu();
 		mnEdit = new EditMenu(notepad);
@@ -28,8 +27,7 @@ public class PopupMenu
 		notepad.getTxtArea().setComponentPopupMenu(popupItems());
 	}
 
-	public JPopupMenu popupItems()
-	{
+	public JPopupMenu popupItems() {
 
 		popupMenu.add(mnEdit.editUndo());
 		popupMenu.add(mnEdit.editRedo());
@@ -53,8 +51,7 @@ public class PopupMenu
 		return popupMenu;
 	}
 
-	public JSeparator getSeparator()
-	{
+	public JSeparator getSeparator() {
 		sep = new JSeparator();
 		return sep;
 	}

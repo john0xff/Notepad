@@ -26,10 +26,10 @@ import com.phoenixjcam.application.Notepad;
 /**
  * 
  * @author Bart Bien <br>
- *         source available at my web site <a href="http://phoenixjcam.com">phoenixjcam.com</a>
+ *         source available at my web site <a
+ *         href="http://phoenixjcam.com">phoenixjcam.com</a>
  */
-public class FileMenu implements ActionListener
-{
+public class FileMenu implements ActionListener {
 	private Notepad notepad;
 	private JMenu mnFile;
 	private JMenuItem mntmNew;
@@ -42,22 +42,18 @@ public class FileMenu implements ActionListener
 	private String filePath;
 	private String fileContent;
 
-	public FileMenu(Notepad nt)
-	{
+	public FileMenu(Notepad nt) {
 		notepad = nt;
 		filePath = "";
 
-		notepad.addWindowListener(new WindowAdapter()
-		{
-			public void windowClosing(WindowEvent e)
-			{
+		notepad.addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent e) {
 				actionExit();
 			}
 		});
 	}
 
-	public JMenu fileItems()
-	{
+	public JMenu fileItems() {
 		mnFile = new JMenu("File");
 
 		mnFile.add(fileNew());
@@ -71,55 +67,48 @@ public class FileMenu implements ActionListener
 		return mnFile;
 	}
 
-	public JMenuItem fileNew()
-	{
+	public JMenuItem fileNew() {
 		mntmNew = new JMenuItem("New");
 		mntmNew.setAccelerator(KeyStroke.getKeyStroke("ctrl N"));
 		mntmNew.addActionListener(this);
 		return mntmNew;
 	}
 
-	public JMenuItem fileOpen()
-	{
+	public JMenuItem fileOpen() {
 		mntmOpen = new JMenuItem("Open...");
 		mntmOpen.setAccelerator(KeyStroke.getKeyStroke("ctrl O"));
 		mntmOpen.addActionListener(this);
 		return mntmOpen;
 	}
 
-	public JMenuItem fileSave()
-	{
+	public JMenuItem fileSave() {
 		mntmSave = new JMenuItem("Save");
 		mntmSave.setAccelerator(KeyStroke.getKeyStroke("ctrl S"));
 		mntmSave.addActionListener(this);
 		return mntmSave;
 	}
 
-	public JMenuItem fileSaveAs()
-	{
+	public JMenuItem fileSaveAs() {
 		mntmSaveAs = new JMenuItem("Save as...");
 		mntmSaveAs.setAccelerator(KeyStroke.getKeyStroke("ctrl alt S"));
 		mntmSaveAs.addActionListener(this);
 		return mntmSaveAs;
 	}
 
-	public JMenuItem filePageSettings()
-	{
+	public JMenuItem filePageSettings() {
 		mntmPageSettings = new JMenuItem("Page Settings...");
 		mntmPageSettings.addActionListener(this);
 		return mntmPageSettings;
 	}
 
-	public JMenuItem filePrint()
-	{
+	public JMenuItem filePrint() {
 		mntmPrint = new JMenuItem("Print...");
 		mntmPrint.setAccelerator(KeyStroke.getKeyStroke("ctrl P"));
 		mntmPrint.addActionListener(this);
 		return mntmPrint;
 	}
 
-	public JMenuItem fileExit()
-	{
+	public JMenuItem fileExit() {
 		mntmExit = new JMenuItem("Exit");
 		mntmExit.setAccelerator(KeyStroke.getKeyStroke("alt F4"));
 		mntmExit.addActionListener(this);
@@ -127,236 +116,181 @@ public class FileMenu implements ActionListener
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent e)
-	{
+	public void actionPerformed(ActionEvent e) {
 		Object event = e.getSource();
 
-		if (event == mntmNew)
-		{
+		if (event == mntmNew) {
 			actionFileNew();
-		}
-		else if (event == mntmOpen)
-		{
+		} else if (event == mntmOpen) {
 			actionFileOpen();
-		}
-		else if (event == mntmSave)
-		{
+		} else if (event == mntmSave) {
 			actionFileSave();
-		}
-		else if (event == mntmSaveAs)
-		{
+		} else if (event == mntmSaveAs) {
 			actionFileSaveAs();
-		}
-		else if (event == mntmPageSettings)
-		{
+		} else if (event == mntmPageSettings) {
 			actionPageSettings();
-		}
-		else if (event == mntmPrint)
-		{
+		} else if (event == mntmPrint) {
 			actionPrint();
-		}
-		else if (event == mntmExit)
-		{
+		} else if (event == mntmExit) {
 			actionExit();
 		}
 	}
 
-	public void actionFileNew()
-	{
+	public void actionFileNew() {
 		JTextArea txtArea = notepad.getTxtArea();
 		String currentTxt = txtArea.getText();
 
-		if (currentTxt.equals("") || currentTxt.equals(fileContent))
-		{
+		if (currentTxt.equals("") || currentTxt.equals(fileContent)) {
 			txtArea.setText("");
 			fileContent = "";
 			filePath = "";
 			notepad.setTitle("Untitled - Notepad");
-		}
-		else
-		{
-			int dialog = JOptionPane.showConfirmDialog(null, "Would you like to save changes to file without title?");
+		} else {
+			int dialog = JOptionPane.showConfirmDialog(null,
+					"Would you like to save changes to file without title?");
 
-			if (dialog == 0)
-			{
+			if (dialog == 0) {
 				actionFileSave();
-			}
-			else if (dialog == 1)
-			{
+			} else if (dialog == 1) {
 				txtArea.setText("");
 				filePath = "";
 				notepad.setTitle("Untitled - Notepad");
-			}
-			else if (dialog == 2)
-			{
+			} else if (dialog == 2) {
 				return;
 			}
 		}
 	}
 
-	public void actionFileOpen()
-	{
+	public void actionFileOpen() {
 		JTextArea txtArea = notepad.getTxtArea();
 		JFileChooser fileChooser = new JFileChooser();
 		fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
 
 		int dialog = fileChooser.showOpenDialog(null);
 
-		if (dialog == JFileChooser.CANCEL_OPTION)
-		{
+		if (dialog == JFileChooser.CANCEL_OPTION) {
 			return;
-		}
-		else if (dialog == JFileChooser.OPEN_DIALOG)
-		{
+		} else if (dialog == JFileChooser.OPEN_DIALOG) {
 			File myFile = fileChooser.getSelectedFile();
-			try
-			{
+			try {
 				@SuppressWarnings("resource")
-				BufferedReader input = new BufferedReader(new FileReader(myFile));
+				BufferedReader input = new BufferedReader(
+						new FileReader(myFile));
 				StringBuffer stringBuffer = new StringBuffer();
 				String line;
-				while ((line = input.readLine()) != null)
-				{
+				while ((line = input.readLine()) != null) {
 					stringBuffer.append(line + "\n");
 				}
 				txtArea.setText(stringBuffer.toString());
 				fileContent = txtArea.getText();
 				filePath = myFile.toString();
 				notepad.setTitle(myFile.getName() + " - Notepad");
-			}
-			catch (FileNotFoundException e)
-			{
+			} catch (FileNotFoundException e) {
 				JOptionPane.showMessageDialog(null, "File not found: " + e);
-			}
-			catch (IOException e)
-			{
+			} catch (IOException e) {
 				JOptionPane.showMessageDialog(null, "IO ERROR: " + e);
 			}
 		}
 	}
 
-	public void actionFileSave()
-	{
+	public void actionFileSave() {
 		JTextArea txtArea = notepad.getTxtArea();
 
-		if (filePath.equals(""))
-		{
+		if (filePath.equals("")) {
 			actionFileSaveAs();
 			return;
 		}
 
-		try
-		{
+		try {
 			FileWriter fileWriter = new FileWriter(filePath);
 			fileWriter.write(txtArea.getText());
 			fileContent = txtArea.getText();
 			fileWriter.close();
-		}
-		catch (IOException e)
-		{
-			JOptionPane.showMessageDialog(null, "Failed to save the file", "Error", JOptionPane.ERROR_MESSAGE);
+		} catch (IOException e) {
+			JOptionPane.showMessageDialog(null, "Failed to save the file",
+					"Error", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 
-	public void actionFileSaveAs()
-	{
+	public void actionFileSaveAs() {
 		JTextArea txtArea = notepad.getTxtArea();
 		JFileChooser fileChooser = new JFileChooser();
 		fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
 
 		int dialog = fileChooser.showSaveDialog(null);
 
-		if (dialog == JFileChooser.CANCEL_OPTION)
-		{
+		if (dialog == JFileChooser.CANCEL_OPTION) {
 			return;
-		}
-		else if (dialog == JFileChooser.OPEN_DIALOG)
-		{
+		} else if (dialog == JFileChooser.OPEN_DIALOG) {
 
 			File myFile = fileChooser.getSelectedFile();
 
-			if (myFile.exists())
-			{
-				dialog = JOptionPane.showConfirmDialog(null, "A file with same name already exists!\nAre you sure want to overwrite?");
-				if (dialog != 0)
-				{
+			if (myFile.exists()) {
+				dialog = JOptionPane
+						.showConfirmDialog(null,
+								"A file with same name already exists!\nAre you sure want to overwrite?");
+				if (dialog != 0) {
 					return;
 				}
 			}
-			try
-			{
+			try {
 				FileWriter fileWriter = new FileWriter(myFile);
 				fileWriter.write(txtArea.getText());
 				fileContent = txtArea.getText();
 				notepad.setTitle(myFile.getName() + " - Notepad");
 				fileWriter.close();
-			}
-			catch (IOException e)
-			{
-				JOptionPane.showMessageDialog(null, "Failed to save the file", "Error", JOptionPane.ERROR_MESSAGE);
+			} catch (IOException e) {
+				JOptionPane.showMessageDialog(null, "Failed to save the file",
+						"Error", JOptionPane.ERROR_MESSAGE);
 
 			}
 		}
 	}
 
-	public void actionPageSettings()
-	{
+	public void actionPageSettings() {
 		PrinterJob printJob = PrinterJob.getPrinterJob();
 		printJob.pageDialog(printJob.defaultPage());
 	}
 
-	public void actionPrint()
-	{
+	public void actionPrint() {
 		PrinterJob printer = PrinterJob.getPrinterJob();
 
 		HashPrintRequestAttributeSet printAttr = new HashPrintRequestAttributeSet();
-		if (printer.printDialog(printAttr))
-		{
-			try
-			{
+		if (printer.printDialog(printAttr)) {
+			try {
 				printer.print(printAttr);
-			}
-			catch (PrinterException e)
-			{
-				JOptionPane.showMessageDialog(null, "Failed to print the file: " + e, "Error", JOptionPane.ERROR_MESSAGE);
+			} catch (PrinterException e) {
+				JOptionPane.showMessageDialog(null,
+						"Failed to print the file: " + e, "Error",
+						JOptionPane.ERROR_MESSAGE);
 			}
 		}
 	}
 
-	public void actionExit()
-	{
+	public void actionExit() {
 		String currentTxt = notepad.getTxtArea().getText();
 
-		if (currentTxt.equals("") || currentTxt.equals(fileContent))
-		{
+		if (currentTxt.equals("") || currentTxt.equals(fileContent)) {
 			System.exit(0);
-		}
-		else
-		{
-			int dialog = JOptionPane.showConfirmDialog(null, "Do you want to save changes to Untitled?");
+		} else {
+			int dialog = JOptionPane.showConfirmDialog(null,
+					"Do you want to save changes to Untitled?");
 
-			if (dialog == 0)
-			{
+			if (dialog == 0) {
 				actionFileSave();
-			}
-			else if (dialog == 1)
-			{
+			} else if (dialog == 1) {
 				System.exit(0);
-			}
-			else if (dialog == 2)
-			{
+			} else if (dialog == 2) {
 				return;
 			}
 		}
 	}
 
-	public String getFileContent()
-	{
+	public String getFileContent() {
 		return fileContent;
 	}
 
-	public void setFileContent(String fileContent)
-	{
+	public void setFileContent(String fileContent) {
 		this.fileContent = fileContent;
 	}
 }

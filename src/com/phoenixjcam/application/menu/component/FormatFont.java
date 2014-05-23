@@ -24,10 +24,11 @@ import com.phoenixjcam.application.Notepad;
 /**
  * 
  * @author Bart Bien <br>
- *         source available at my web site <a href="http://phoenixjcam.com">phoenixjcam.com</a>
+ *         source available at my web site <a
+ *         href="http://phoenixjcam.com">phoenixjcam.com</a>
  */
-public class FormatFont extends JDialog implements ActionListener, ListSelectionListener
-{
+public class FormatFont extends JDialog implements ActionListener,
+		ListSelectionListener {
 	private static final long serialVersionUID = 1L;
 
 	private Notepad notepad;
@@ -54,8 +55,7 @@ public class FormatFont extends JDialog implements ActionListener, ListSelection
 	private int fontSize;
 	private int fontStyle;
 
-	public FormatFont(Notepad nt)
-	{
+	public FormatFont(Notepad nt) {
 		setTitle("Font");
 		notepad = nt;
 		init();
@@ -72,51 +72,47 @@ public class FormatFont extends JDialog implements ActionListener, ListSelection
 		add(buttonCancel());
 	}
 
-	public void init()
-	{
+	public void init() {
 		setLayout(null);
 		int width = 500;
 		int height = 500;
 		setSize(width, height);
 		setResizable(false);
 
-		Point centerPoint = GraphicsEnvironment.getLocalGraphicsEnvironment().getCenterPoint();
-		setLocation((centerPoint.x) - (width / 2), (centerPoint.y) - (height / 2));
+		Point centerPoint = GraphicsEnvironment.getLocalGraphicsEnvironment()
+				.getCenterPoint();
+		setLocation((centerPoint.x) - (width / 2), (centerPoint.y)
+				- (height / 2));
 	}
 
-	public JLabel labelFind()
-	{
+	public JLabel labelFind() {
 		lblList = new JLabel("Font:");
 		lblList.setBounds(10, 10, 120, 20);
 		lblList.setFont(new Font("Arial", Font.PLAIN, 16));
 		return lblList;
 	}
 
-	public JLabel labelStyle()
-	{
+	public JLabel labelStyle() {
 		lblStyle = new JLabel("Style:");
 		lblStyle.setBounds(220, 10, 120, 20);
 		lblStyle.setFont(new Font("Arial", Font.PLAIN, 16));
 		return lblStyle;
 	}
 
-	public JLabel labelSize()
-	{
+	public JLabel labelSize() {
 		lblSize = new JLabel("Size:");
 		lblSize.setBounds(350, 10, 120, 20);
 		lblSize.setFont(new Font("Arial", Font.PLAIN, 16));
 		return lblSize;
 	}
 
-	public JLabel labelPreview()
-	{
+	public JLabel labelPreview() {
 		lblPreview = new JLabel("Preview:");
 		lblPreview.setBounds(220, 250, 120, 20);
 		return lblPreview;
 	}
 
-	public JLabel labelFontPreview()
-	{
+	public JLabel labelFontPreview() {
 		lblFontPreview = new JLabel("Sample Text");
 		lblFontPreview.setBounds(220, 280, 250, 80);
 		lblFontPreview.setHorizontalAlignment(SwingConstants.CENTER);
@@ -125,9 +121,9 @@ public class FormatFont extends JDialog implements ActionListener, ListSelection
 		return lblFontPreview;
 	}
 
-	public void listFont()
-	{
-		GraphicsEnvironment gEnviroment = GraphicsEnvironment.getLocalGraphicsEnvironment();
+	public void listFont() {
+		GraphicsEnvironment gEnviroment = GraphicsEnvironment
+				.getLocalGraphicsEnvironment();
 		fontNames = gEnviroment.getAvailableFontFamilyNames();
 
 		fontList = new JList<String>(fontNames);
@@ -141,10 +137,8 @@ public class FormatFont extends JDialog implements ActionListener, ListSelection
 		fontList.addListSelectionListener(this);
 	}
 
-	public void listFontStyle()
-	{
-		String styles[] =
-		{ "Regular", "Bold", "Italic", "Bold Italic" };
+	public void listFontStyle() {
+		String styles[] = { "Regular", "Bold", "Italic", "Bold Italic" };
 		styleList = new JList<String>(styles);
 		styleList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
@@ -155,8 +149,7 @@ public class FormatFont extends JDialog implements ActionListener, ListSelection
 		styleList.addListSelectionListener(this);
 	}
 
-	public void listFontSize()
-	{
+	public void listFontSize() {
 		Vector<String> fontList = new Vector<String>(40);
 		for (int i = 8; i <= 100; i += 2)
 			fontList.addElement(String.valueOf(i));
@@ -171,8 +164,7 @@ public class FormatFont extends JDialog implements ActionListener, ListSelection
 		sizeList.addListSelectionListener(this);
 	}
 
-	public JButton buttonOk()
-	{
+	public JButton buttonOk() {
 		btnOk = new JButton("OK");
 		btnOk.setBounds(270, 420, 100, 30);
 		lblPreview.setFont(new Font("Arial", Font.PLAIN, 16));
@@ -180,8 +172,7 @@ public class FormatFont extends JDialog implements ActionListener, ListSelection
 		return btnOk;
 	}
 
-	public JButton buttonCancel()
-	{
+	public JButton buttonCancel() {
 		btnCancel = new JButton("Cancel");
 		btnCancel.setBounds(380, 420, 100, 30);
 		lblPreview.setFont(new Font("Arial", Font.PLAIN, 16));
@@ -190,83 +181,58 @@ public class FormatFont extends JDialog implements ActionListener, ListSelection
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent e)
-	{
+	public void actionPerformed(ActionEvent e) {
 		Object event = e.getSource();
 
-		if (event == btnOk)
-		{
+		if (event == btnOk) {
 			actionOk();
-		}
-		else if (event == btnCancel)
-		{
+		} else if (event == btnCancel) {
 			actionCancel();
 		}
 	}
 
-	public void actionOk()
-	{
-		try
-		{
+	public void actionOk() {
+		try {
 			notepad.getTxtArea().setFont(font);
-		}
-		catch (NullPointerException e)
-		{
+		} catch (NullPointerException e) {
 		}
 		this.setVisible(false);
 	}
 
-	public void actionCancel()
-	{
+	public void actionCancel() {
 		this.setVisible(false);
 	}
 
 	@Override
-	public void valueChanged(ListSelectionEvent e)
-	{
+	public void valueChanged(ListSelectionEvent e) {
 		Object event = e.getSource();
 
-		if (event == fontList)
-		{
+		if (event == fontList) {
 			lblFontPreview.setText(fontList.getSelectedValue().toString());
 			changeFontSample();
-		}
-		else if (event == sizeList)
-		{
+		} else if (event == sizeList) {
 			changeFontSample();
-		}
-		else if (event == styleList)
-		{
+		} else if (event == styleList) {
 			changeFontSample();
 		}
 	}
 
-	public void changeFontSample()
-	{
-		try
-		{
+	public void changeFontSample() {
+		try {
 			fontName = fontList.getSelectedValue().toString();
-		}
-		catch (NullPointerException e)
-		{
+		} catch (NullPointerException e) {
 			fontName = "Verdana";
 		}
 
-		try
-		{
+		try {
 			fontStyle = getStyle();
-		}
-		catch (NullPointerException e)
-		{
+		} catch (NullPointerException e) {
 			fontStyle = Font.PLAIN;
 		}
 
-		try
-		{
+		try {
 			fontSize = Integer.parseInt(sizeList.getSelectedValue().toString());
-		}
-		catch (NullPointerException e)
-		{
+		} catch (NullPointerException e) {
 			fontSize = 12;
 		}
 
@@ -274,8 +240,7 @@ public class FormatFont extends JDialog implements ActionListener, ListSelection
 		lblFontPreview.setFont(font);
 	}
 
-	public int getStyle()
-	{
+	public int getStyle() {
 		String selectedValue = styleList.getSelectedValue().toString();
 
 		if (selectedValue.equals("Bold"))
