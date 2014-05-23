@@ -17,54 +17,54 @@ import com.phoenixjcam.application.Notepad;
  *         href="http://phoenixjcam.com">phoenixjcam.com</a>
  */
 public class HelpMenu implements ActionListener {
-	private Notepad notepad;
-	private JMenu mnHelp;
-	private JMenuItem showHelp;
-	private JMenuItem about;
+    private Notepad notepad;
+    private JMenu mnHelp;
+    private JMenuItem showHelp;
+    private JMenuItem about;
 
-	public HelpMenu(Notepad nt) {
-		notepad = nt;
+    public HelpMenu(Notepad nt) {
+	notepad = nt;
+    }
+
+    public JMenu helpItems() {
+	mnHelp = new JMenu("Help");
+	mnHelp.add(helper());
+	mnHelp.add(notepadInfo());
+	return mnHelp;
+    }
+
+    public JMenuItem helper() {
+	showHelp = new JMenuItem("Show Help");
+	showHelp.setAccelerator(KeyStroke.getKeyStroke("shift F1"));
+	showHelp.addActionListener(this);
+	return showHelp;
+    }
+
+    public JMenuItem notepadInfo() {
+	about = new JMenuItem("Notepad - Info");
+	about.setAccelerator(KeyStroke.getKeyStroke("F1"));
+	about.addActionListener(this);
+	return about;
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+	Object event = e.getSource();
+
+	if (event == showHelp) {
+	    actionHelp();
+	} else if (event == about) {
+	    actionNotepadInfo();
 	}
+    }
 
-	public JMenu helpItems() {
-		mnHelp = new JMenu("Help");
-		mnHelp.add(helper());
-		mnHelp.add(notepadInfo());
-		return mnHelp;
-	}
+    public void actionHelp() {
 
-	public JMenuItem helper() {
-		showHelp = new JMenuItem("Show Help");
-		showHelp.setAccelerator(KeyStroke.getKeyStroke("shift F1"));
-		showHelp.addActionListener(this);
-		return showHelp;
-	}
+	JOptionPane.showMessageDialog(notepad, "phoenixjcam.com");
+    }
 
-	public JMenuItem notepadInfo() {
-		about = new JMenuItem("Notepad - Info");
-		about.setAccelerator(KeyStroke.getKeyStroke("F1"));
-		about.addActionListener(this);
-		return about;
-	}
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		Object event = e.getSource();
-
-		if (event == showHelp) {
-			actionHelp();
-		} else if (event == about) {
-			actionNotepadInfo();
-		}
-	}
-
-	public void actionHelp() {
-
-		JOptionPane.showMessageDialog(notepad, "phoenixjcam.com");
-	}
-
-	public void actionNotepadInfo() {
-		JOptionPane.showMessageDialog(notepad,
-				"author Bart Bien \nphoenixjcam.com");
-	}
+    public void actionNotepadInfo() {
+	JOptionPane.showMessageDialog(notepad,
+		"author Bart Bien \nphoenixjcam.com");
+    }
 }
